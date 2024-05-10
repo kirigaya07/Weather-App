@@ -34,7 +34,7 @@ To get started with this project, follow these steps:
 
 ## Credits
 
-- Weather data provided by [Yahoo Weather API](https://rapidapi.com/community/api/yahoo-weather5).
+- Weather data provided by [Yahoo Weather API](https://rapidapi.com/apishub/api/yahoo-weather5/).
 - Built with [Bootstrap](https://getbootstrap.com/).
 
 ## License
