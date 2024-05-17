@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="light">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -10,6 +10,7 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
+
   </head>
   <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -51,6 +52,7 @@
               </ul>
             </li>
           </ul>
+          <button type="button" id="dark" class="btn btn-dark">Dark </button> 
           <form class="d-flex" role="search">
             <input
               id="city"
@@ -243,54 +245,6 @@
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
-    <script>
-const getWeather = (city) => {
-  document.getElementById("cityName").innerHTML = city;
-  const url =
-    "https://weather-by-api-ninjas.p.rapidapi.com/v1/weather?city=" + city;
-  const options = {
-    method: "GET",
-    headers: {
-      "X-RapidAPI-Key": "e04acfee01msh5b8330980896872p1fdf0ejsn704ea4ee0983",
-      "X-RapidAPI-Host": "weather-by-api-ninjas.p.rapidapi.com",
-    },
-  };
-
-  async function fetchData() {
-    try {
-      const response = await fetch(url, options);
-      if (!response.ok) {
-        throw new Error('Failed to fetch weather data');
-      }
-      const result = await response.json();
-      console.log(result);
-      document.getElementById("temp").innerHTML = result.temp;
-      document.getElementById("feels_like").innerHTML = result.feels_like;
-      document.getElementById("humidity2").innerHTML = result.humidity;
-      document.getElementById("min_temp").innerHTML = result.min_temp;
-      document.getElementById("max_temp").innerHTML = result.max_temp;
-      document.getElementById("wind_speed2").innerHTML = result.wind_speed;
-      document.getElementById("wind_degrees").innerHTML = result.wind_degrees;
-      document.getElementById("sunrise").innerHTML = result.sunrise;
-      document.getElementById("sunset").innerHTML = result.sunset;
-    } catch (error) {
-      console.error(error);
-      alert('Failed to fetch weather data. Please try again later.');
-    }
-  }
-
-  fetchData();
-};
-
-document.getElementById("submit").addEventListener("click", (event) => {
-  event.preventDefault();
-  const city = document.getElementById("city").value;
-  getWeather(city);
-});
-
-// Load weather data for Delhi by default
-getWeather("Delhi");
-
-    </script>
+    <script src="index.js"></script>
   </body>
 </html>
