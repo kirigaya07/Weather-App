@@ -37,7 +37,5 @@ To get started with this project, follow these steps:
 - Weather data provided by [Yahoo Weather API](https://rapidapi.com/apishub/api/yahoo-weather5/).
 - Built with [Bootstrap](https://getbootstrap.com/).
 
-## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
