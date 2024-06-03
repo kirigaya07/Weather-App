@@ -9,36 +9,44 @@ const getWeather = (city) => {
       "X-RapidAPI-Host": "weather-by-api-ninjas.p.rapidapi.com",
     },
   };
+
   async function fetchData() {
     try {
       const response = await fetch(url, options);
+      if (!response.ok) {
+        throw new Error("Failed to fetch weather data");
+      }
       const result = await response.json();
       console.log(result);
-      // document.getElementById("cloud_pct").innerHTML = result.cloud_pct;
       document.getElementById("temp").innerHTML = result.temp;
       document.getElementById("feels_like").innerHTML = result.feels_like;
-      // document.getElementById("humidity").innerHTML = result.humidity;
       document.getElementById("humidity2").innerHTML = result.humidity;
       document.getElementById("min_temp").innerHTML = result.min_temp;
       document.getElementById("max_temp").innerHTML = result.max_temp;
-      // document.getElementById("wind_speed").innerHTML = result.wind_speed;
       document.getElementById("wind_speed2").innerHTML = result.wind_speed;
       document.getElementById("wind_degrees").innerHTML = result.wind_degrees;
       document.getElementById("sunrise").innerHTML = result.sunrise;
       document.getElementById("sunset").innerHTML = result.sunset;
     } catch (error) {
       console.error(error);
+      alert("Failed to fetch weather data. Please try again later.");
     }
   }
 
-  document.addEventListener("DOMContentLoaded", function () {
-    fetchData();
-  });
+  fetchData();
 };
 
-document.getElementById("submit").addEventListener("click", (e) => {
-  e.preventDefault();
-  getWeather(document.getElementById("city").value);
+document.getElementById("dark").addEventListener("click", function () {
+  const currentTheme = document.documentElement.getAttribute("data-bs-theme");
+  const newTheme = currentTheme === "dark" ? "light" : "dark";
+  document.documentElement.setAttribute("data-bs-theme", newTheme);
 });
 
+document.getElementById("submit").addEventListener("click", (event) => {
+  event.preventDefault();
+  const city = document.getElementById("city").value;
+  getWeather(city);
+});
+
+// Load weather data for Delhi by default
 getWeather("Delhi");
