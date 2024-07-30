@@ -47,6 +47,11 @@
       .button:hover {
         background-color: #0056b3;
       }
+      #weather_icon {
+        display: block;
+        margin: 20px auto;
+        max-width: 100px;
+      }
     </style>
   </head>
   <body>
@@ -86,34 +91,103 @@
       <h2>Code Explanation</h2>
       <h3>HTML</h3>
       <pre>
-            <code>
-                <!-- HTML code for the Weather App interface -->
-                <!-- Include Bootstrap CSS -->
-                &lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous"&gt;
-                <!-- Weather App interface code -->
-                &lt;!-- Weather App interface HTML code goes here --&gt;
-            </code>
-        </pre>
+        <code>
+          &lt;!-- HTML code for the Weather App interface --&gt;
+          &lt;!-- Include Bootstrap CSS --&gt;
+          &lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous"&gt;
+          &lt;!-- Weather App interface code --&gt;
+          &lt;div class="container"&gt;
+            &lt;h1&gt;Weather App&lt;/h1&gt;
+            &lt;div class="mb-3"&gt;
+              &lt;label for="city" class="form-label"&gt;City&lt;/label&gt;
+              &lt;input type="text" class="form-control" id="city" placeholder="Enter city name"&gt;
+            &lt;/div&gt;
+            &lt;button id="submit" class="btn btn-primary"&gt;Search&lt;/button&gt;
+            &lt;button id="dark" class="btn btn-secondary"&gt;Toggle Dark Mode&lt;/button&gt;
+
+            &lt;h2&gt;Weather Information&lt;/h2&gt;
+            &lt;p&gt;&lt;strong&gt;City:&lt;/strong&gt; &lt;span id="cityName"&gt;&lt;/span&gt;&lt;/p&gt;
+            &lt;p&gt;&lt;strong&gt;Temperature:&lt;/strong&gt; &lt;span id="temp"&gt;&lt;/span&gt; °C&lt;/p&gt;
+            &lt;p&gt;&lt;strong&gt;Feels Like:&lt;/strong&gt; &lt;span id="feels_like"&gt;&lt;/span&gt; °C&lt;/p&gt;
+            &lt;p&gt;&lt;strong&gt;Humidity:&lt;/strong&gt; &lt;span id="humidity2"&gt;&lt;/span&gt; %&lt;/p&gt;
+            &lt;p&gt;&lt;strong&gt;Min Temperature:&lt;/strong&gt; &lt;span id="min_temp"&gt;&lt;/span&gt; °C&lt;/p&gt;
+            &lt;p&gt;&lt;strong&gt;Max Temperature:&lt;/strong&gt; &lt;span id="max_temp"&gt;&lt;/span&gt; °C&lt;/p&gt;
+            &lt;p&gt;&lt;strong&gt;Wind Speed:&lt;/strong&gt; &lt;span id="wind_speed2"&gt;&lt;/span&gt; m/s&lt;/p&gt;
+            &lt;p&gt;&lt;strong&gt;Wind Direction:&lt;/strong&gt; &lt;span id="wind_degrees"&gt;&lt;/span&gt;&lt;/p&gt;
+            &lt;p&gt;&lt;strong&gt;Sunrise:&lt;/strong&gt; &lt;span id="sunrise"&gt;&lt;/span&gt;&lt;/p&gt;
+            &lt;p&gt;&lt;strong&gt;Sunset:&lt;/strong&gt; &lt;span id="sunset"&gt;&lt;/span&gt;&lt;/p&gt;
+            &lt;img id="weather_icon" src="" alt="Weather Icon"&gt;
+          &lt;/div&gt;
+        </code>
+      </pre>
 
       <h3>JavaScript</h3>
       <pre>
-            <code>
-                // JavaScript code for fetching weather data and updating the interface
-                // Define function to fetch weather data
-                const getWeather = (city) =&gt; {
-                    // Fetch weather data for the specified city
-                    // Update interface with weather information
-                };
-                // Add event listener to search button to fetch weather data for the entered city
-                document.getElementById("submit").addEventListener("click", (event) =&gt; {
-                    event.preventDefault();
-                    const city = document.getElementById("city").value;
-                    getWeather(city);
-                });
-                // Load weather data for Delhi by default
-                getWeather("Delhi");
-            </code>
-        </pre>
+        <code>
+          // JavaScript code for fetching weather data and updating the interface
+          const getWeather = (city) => {
+            document.getElementById("cityName").innerHTML = city;
+            const apiKey = "API_KEY";
+            const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+
+            const getWindDirection = (deg) => {
+              const directions = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"];
+              const index = Math.floor((deg + 22.5) / 45) % 8;
+              return directions[index];
+            };
+
+            async function fetchData() {
+              try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                  throw new Error("Failed to fetch weather data");
+                }
+                const result = await response.json();
+                console.log(result);
+
+                document.getElementById("temp").innerHTML = result.main.temp;
+                document.getElementById("feels_like").innerHTML = result.main.feels_like;
+                document.getElementById("humidity2").innerHTML = result.main.humidity;
+                document.getElementById("min_temp").innerHTML = result.main.temp_min - 2.14;
+                document.getElementById("max_temp").innerHTML = result.main.temp_max;
+                document.getElementById("wind_speed2").innerHTML = result.wind.speed;
+
+                const windDirection = getWindDirection(result.wind.deg);
+                document.getElementById("wind_degrees").innerHTML = windDirection;
+
+                const sunrise = new Date(result.sys.sunrise * 1000);
+                const sunset = new Date(result.sys.sunset * 1000);
+                document.getElementById("sunrise").innerHTML = sunrise.toLocaleTimeString();
+                document.getElementById("sunset").innerHTML = sunset.toLocaleTimeString();
+
+                const iconCode = result.weather[0].icon;
+                const iconUrl = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
+                document.getElementById("weather_icon").src = iconUrl;
+              } catch (error) {
+                console.error(error);
+                alert("Failed to fetch weather data. Please try again later.");
+              }
+            }
+
+            fetchData();
+          };
+
+          document.getElementById("dark").addEventListener("click", () => {
+            const currentTheme = document.documentElement.getAttribute("data-bs-theme");
+            const newTheme = currentTheme === "dark" ? "light" : "dark";
+            document.documentElement.setAttribute("data-bs-theme", newTheme);
+          });
+
+          document.getElementById("submit").addEventListener("click", (event) => {
+            event.preventDefault();
+            const city = document.getElementById("city").value;
+            getWeather(city);
+          });
+
+          // Load weather data for Delhi by default
+          getWeather("Delhi");
+        </code>
+      </pre>
 
       <h2>Requirements</h2>
       <p>
@@ -123,9 +197,10 @@
 
       <h2>API Key</h2>
       <p>
-        The Weather App uses the RapidAPI platform to fetch weather data. An API
-        key is required for accessing the weather data. Make sure to replace the
-        placeholder API key in the JavaScript code with your own valid API key.
+        The Weather App uses the OpenWeatherMap platform to fetch weather data.
+        An API key is required for accessing the weather data. Make sure to
+        replace the placeholder API key in the JavaScript code with your own
+        valid API key.
       </p>
 
       <h2>Support</h2>

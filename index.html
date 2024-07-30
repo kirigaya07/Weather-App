@@ -10,7 +10,6 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
-
   </head>
   <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -30,7 +29,9 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="./index.html">Home</a>
+              <a class="nav-link active" aria-current="page" href="./index.html"
+                >Home</a
+              >
             </li>
             <li class="nav-item">
               <a class="nav-link" href="./user.html">About this App</a>
@@ -52,7 +53,7 @@
               </ul>
             </li>
           </ul>
-          <button type="button" id="dark" class="btn btn-dark">Dark </button> 
+          <button type="button" id="dark" class="btn btn-dark m-2">Dark</button>
           <form class="d-flex" role="search">
             <input
               id="city"
@@ -78,19 +79,28 @@
                 <h4 class="my-0 fw-normal">Temperatures</h4>
               </div>
               <div class="card-body">
-                <h1 class="card-title pricing-card-title"> <span id="temp"></span>
-                  <small class="text-body-secondary fw-light"><span>&#8451</span></small>
+                <h1 class="card-title pricing-card-title">
+                  <span id="temp"></span>
+                  <small class="text-body-secondary fw-light"
+                    ><span>&#8451; </span></small
+                  >
                 </h1>
                 <ul class="list-unstyled mt-3 mb-4">
-                  <li>Min Temperature is <span id="min_temp"></span><span>&#8451</span></li>
-                  <li>Max Temperature is <span id="max_temp"></span><span>&#8451</span></li>
+                  <li>
+                    Min Temperature : <span id="min_temp"></span
+                    ><span>&#8451;</span>
+                  </li>
+                  <li>
+                    Max Temperature : <span id="max_temp"></span
+                    ><span>&#8451;</span>
+                  </li>
                 </ul>
-                <button
+                <!-- <button
                   type="button"
                   class="w-100 btn btn-lg btn-outline-primary"
                 >
                   Sign up for free
-                </button>
+                </button> -->
               </div>
             </div>
           </div>
@@ -101,15 +111,18 @@
               </div>
               <div class="card-body">
                 <h1 class="card-title pricing-card-title">
-                  <span id="humidity2"></span><small class="text-body-secondary fw-light"><span>%</span></small>
+                  <span id="humidity2"></span
+                  ><small class="text-body-secondary fw-light"
+                    ><span>%</span></small
+                  >
                 </h1>
                 <ul class="list-unstyled mt-3 mb-4">
-                  <li>Wind Degree is <span id="wind_degrees"></span></li>
-                  <li>Feels like is <span id="feels_like"></span><span>&#8451</span></li>
+                  <li>Sunrise Time : <span id="sunrise"></span></li>
+                  <li>Sunset Time : <span id="sunset"></span></li>
                 </ul>
-                <button type="button" class="w-100 btn btn-lg btn-primary">
+                <!-- <button type="button" class="w-100 btn btn-lg btn-primary">
                   Get started
-                </button>
+                </button> -->
               </div>
             </div>
           </div>
@@ -120,123 +133,44 @@
               </div>
               <div class="card-body">
                 <h1 class="card-title pricing-card-title">
-                  <span id="wind_speed2"></span><small class="text-body-secondary fw-light"><span>km/hr</span></small>
+                  <span id="wind_speed2"></span
+                  ><small class="text-body-secondary fw-light"
+                    ><span> km/hr</span></small
+                  >
                 </h1>
                 <ul class="list-unstyled mt-3 mb-4">
-                  <li>Sunrise Time is <span id="sunrise"></span></li>
-                  <li>Sunset Time is <span id="sunset"></span></li>
+                  <li>Wind Degree : <span id="wind_degrees"></span></li>
+                  <li>
+                    Feels like : <span id="feels_like"></span
+                    ><span>&#8451;</span>
+                  </li>
                 </ul>
-                <button type="button" class="w-100 btn btn-lg btn-primary">
-                  Contact us
-                </button>
               </div>
             </div>
           </div>
         </div>
-
-        <h2 class="display-6 text-center mb-4">Common Places</h2>
-
-        <div class="table-responsive">
-          <table class="table text-center">
-            <thead>
-              <tr>
-                <th style="width: 34%"></th>
-                <th style="width: 22%">Cloud_pct</th>
-                <th style="width: 22%">Temp(<span>&#8451</span>)</th>
-                <th style="width: 22%">Feels_like</th>
-                <th style="width: 22%">Humidity</th>
-                <th style="width: 22%">Min_temp(<span>&#8451</span>)</th>
-                <th style="width: 22%">Max_temp(<span>&#8451</span>)</th>
-                <th style="width: 22%">Wind_speed(km/hr)</th>
-                <th style="width: 22%">Wind_degrees</th>
-                <th style="width: 22%">Sunrise</th>
-                <th style="width: 22%">Sunset</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row" class="text-start">Kolkata</th>
-                <td>1</td>
-                <td>2</td>
-                <td>3</td>
-                <td>4</td>
-                <td>5</td>
-                <td>6</td>
-                <td>7</td>
-                <td>8</td>
-                <td>9</td>
-                <td>10</td>
-              </tr>
-              <tr>
-                <th scope="row" class="text-start">Boston</th>
-                <td>1</td>
-                <td>2</td>
-                <td>3</td>
-                <td>4</td>
-                <td>5</td>
-                <td>6</td>
-                <td>7</td>
-                <td>8</td>
-                <td>9</td>
-                <td>10</td>
-              </tr>
-            </tbody>
-
-            <tbody>
-              <tr>
-                <th scope="row" class="text-start">New York</th>
-                <td>1</td>
-                <td>2</td>
-                <td>3</td>
-                <td>4</td>
-                <td>5</td>
-                <td>6</td>
-                <td>7</td>
-                <td>8</td>
-                <td>9</td>
-                <td>10</td>
-              </tr>
-              <tr>
-                <th scope="row" class="text-start">Tokyo</th>
-                <td>1</td>
-                <td>2</td>
-                <td>3</td>
-                <td>4</td>
-                <td>5</td>
-                <td>6</td>
-                <td>7</td>
-                <td>8</td>
-                <td>9</td>
-                <td>10</td>
-              </tr>
-              <tr>
-                <th scope="row" class="text-start">Delhi</th>
-                <td>1</td>
-                <td>2</td>
-                <td>3</td>
-                <td>4</td>
-                <td>5</td>
-                <td>6</td>
-                <td>7</td>
-                <td>8</td>
-                <td>9</td>
-                <td>10</td>
-              </tr>
-              <tr>
-                <th scope="row" class="text-start">Mumbai</th>
-                <td>1</td>
-                <td>2</td>
-                <td>3</td>
-                <td>4</td>
-                <td>5</td>
-                <td>6</td>
-                <td>7</td>
-                <td>8</td>
-                <td>9</td>
-                <td>10</td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="row row-cols-1 row-cols-md-1 mb-3 text-center">
+          <div class="col">
+            <div class="card mb-4 rounded-3 shadow-sm border-primary">
+              <div class="card-header py-3 text-bg-primary border-primary">
+                <h4 class="my-0 fw-normal">Description</h4>
+              </div>
+              <div class="card-body">
+                <h1
+                  class="card-title pricing-card-title"
+                  id="weather_description"
+                ></h1>
+                <ul class="list-unstyled mt-3 mb-4">
+                  <img
+                    src=""
+                    alt="weather Icon"
+                    id="weather_icon"
+                    height="200"
+                  />
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
       </main>
     </div>
