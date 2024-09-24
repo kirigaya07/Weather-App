@@ -16,7 +16,6 @@ const getWeather = (city) => {
         throw new Error("Failed to fetch weather data");
       }
       const result = await response.json();
-      console.log(result);
 
       document.getElementById("temp").innerHTML = result.main.temp;
       document.getElementById("feels_like").innerHTML = result.main.feels_like;
